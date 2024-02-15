@@ -14,6 +14,8 @@ void bubble_sort(int *array, size_t size)
 	bool noswp;
 
 	i = size;
+	if (array == NULL || size < 2)
+		return;
 	while (i > 0)
 	{
 		noswp = true;
