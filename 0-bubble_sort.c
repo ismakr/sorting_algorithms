@@ -14,12 +14,11 @@ void bubble_sort(int *array, size_t size)
 	bool noswp;
 
 	i = size;
-	if (array == NULL || size < 2)
+	if (!array || !size)
 		return;
 	while (i > 0)
 	{
 		noswp = true;
-		print_array(array, size);
 		j = 0;
 		while (j < i - 1)
 		{
@@ -28,6 +27,7 @@ void bubble_sort(int *array, size_t size)
 				swp = array[j + 1];
 				array[j + 1] = array[j];
 				array[j] = swp;
+				print_array(array, size);
 				noswp = false;
 			}
 			j++;
