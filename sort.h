@@ -19,7 +19,6 @@ void print_list(const listint_t *list);
 void bubble_sort(int *array, size_t size);
 void selection_sort(int *array, size_t size);
 void quick_sort(int *array, size_t size);
-void quick_sort_2(int *array, size_t size, size_t start, size_t end);
-void swap(int *array, size_t size ,int *a, int *b);
-size_t lomutoPartition(int *array, size_t start, size_t end, size_t size);
+void quick_sort_2(int *array, size_t size, int low, int high);
+int lomutoPartition(int *array, size_t size, int low, int high);
 #endif
