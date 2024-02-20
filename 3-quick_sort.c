@@ -3,37 +3,34 @@
  * lomutoPartition - Lomuto partition(last ele)
  * @array: uns array
  * @size: size of array
- * @start: start of array 0
- * @end: end of array size - 1
+ * @low: start of array 0
+ * @high: end of array size - 1
  * Return: pivot index
  */
-size_t lomutoPartition(int *array, size_t size, size_t start, size_t end)
+int lomutoPartition(int *array, size_t size, int low, int high)
 {
-	size_t i, j;
-	int swp, pivot;
+	int i, j, pivot, swp;
 
-	pivot = array[end];
-	i = start;
-	j = start;
-	while (i < end)
+	pivot = array[high];
+	i = low;
+	for (j = low; j < high; j++)
 	{
-		if (pivot >= array[i])
+		if (array[j] < pivot)
 		{
 			swp = array[i];
 			array[i] = array[j];
 			array[j] = swp;
-			print_array(array, size);
-			j++;
+			if (array[i] != array[j])
+				print_array(array, size);
+			i++;
 		}
-		i++;
 	}
-	swp = array[end];
-	array[end] = array[j];
-	array[j] = swp;
-	print_array(array, size);
-	if (j == 0)
-		j = end + 1;
-	return (j);
+	swp = array[i];
+	array[i] = array[high];
+	array[high] = swp;
+	if (array[i] != array[high])
+		print_array(array, size);
+	return (i);
 }
 /**
  * quick_sort_2 - sorts an array of integers in
@@ -44,15 +41,15 @@ size_t lomutoPartition(int *array, size_t size, size_t start, size_t end)
  * @high: end of array size - 1
  * Return: void
  */
-void quick_sort_2(int *array, size_t size, size_t low, size_t high)
+void quick_sort_2(int *array, size_t size, int low, int high)
 {
-	if (high > low)
-	{
-		size_t pivot;
+	int p;
 
-		pivot = lomutoPartition(array, size, low, high);
-		quick_sort_2(array, size, low, pivot - 1);
-		quick_sort_2(array, size, pivot + 1, high);
+	if (low < high)
+	{
+		p = lomutoPartition(array, size, low, high);
+		quick_sort_2(array, size, low, p - 1);
+		quick_sort_2(array, size, p + 1, high);
 	}
 }
 /**
@@ -64,5 +61,8 @@ void quick_sort_2(int *array, size_t size, size_t low, size_t high)
  */
 void quick_sort(int *array, size_t size)
 {
-	quick_sort_2(array, size, 0, size - 1);
+	if (!array || !size)
+		return;
+
+	quick_sort_2(array, size, 0, (int)size - 1);
 }
