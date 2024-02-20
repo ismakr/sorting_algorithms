@@ -22,6 +22,7 @@ size_t lomutoPartition(int *array, size_t size, size_t start, size_t end)
 			swp = array[i];
 			array[i] = array[j];
 			array[j] = swp;
+			print_array(array, size);
 			j++;
 		}
 		i++;
